@@ -1,0 +1,24 @@
+{
+
+  "manifest_version": 2,
+  "name": "Facebook Panic Button",
+  "version": "0.1",
+
+  "description": "Adds a browser action icon to the toolbar. Click the button to choose between unliking all your liked pages, unfollowing your followed pages, deleting all of your own posts, hiding your news feeed and more.",
+  "homepage_url": "https://github.com/nyu-ossd-s19/FacebookPanic",
+  "icons": {
+    "48": "icons/beasts-48.png"
+  },
+
+  "permissions": [
+    "*://facebook.com/*",
+    "activeTab",
+    "tabs"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/beasts-32.png",
+    "default_title": "Facebook Panic Button",
+    "default_popup": "popup/panic_menu.html"
+  }
+}
