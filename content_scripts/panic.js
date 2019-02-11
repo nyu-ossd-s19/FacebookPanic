@@ -1,14 +1,13 @@
 (function() {
-  
-  // /**
-  //  * Check and set a global guard variable.
-  //  * If this content script is injected into the same page again,
-  //  * it will do nothing next time.
-  //  */
-  // if ( window.hasRun ) {
-  //   return;
-  // }
-  // window.hasRun = true;
+   
+  function getProfileLink() {
+    return document.querySelector("a[title='Profile']").href;
+  }
+
+  function redirect(url) {
+    browser.runtime.sendMessage({ redirect: url });
+    console.log("Testing Redirect");
+  }
   
   function deletePosts() {
     
@@ -20,8 +19,41 @@
 
   function unfollowPages() {
 
-    // do the thing
-    alert("Not Yet Implemented");
+    /* 
+    * For dev purposes:
+    * To follow the unliked pages, run this in the console ONLY IF YOU HAVE 30 OR SO unliked pages:
+    * [...document.querySelectorAll(".PageLikeButton")].filter(b => b.textContent ==("Like")).forEach(e=>e.click())
+    */
+    const profileLink = getProfileLink();
+    const likesUrl = profileLink + '/likes';
+    // redirect(likesUrl);
+
+    if(location.href != likesUrl) {
+      alert("Please run this on your likes page (facebook.com/USERNAME/likes");
+      console.error(window.url, likesUrl);
+      return;
+    }
+
+    function unfollow() {
+
+      const buttons = document.querySelectorAll(" button.PageLikedButton.PageLikeButton");
+      openButtons(buttons);
+      setTimeout(() => {
+        
+        unlikeAll();
+      }, 2000); 
+    }
+
+    function openButtons(buttons) {
+      buttons.forEach(b => b.click());
+    }
+
+    function unlikeAll() {
+      document.querySelectorAll("span.itemLabel").forEach(u => u.click())
+    }
+
+    unfollow();
+
   }
 
   function hideFeed() {
