@@ -25,9 +25,8 @@
   }
 
   function hideFeed() {
-
-    // do the thing
-    alert("Not Yet Implemented");
+    var ele = document.getElementById("contentArea")
+    ele.parentNode.removeChild(ele)
   }
 
   /**
